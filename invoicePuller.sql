@@ -87,8 +87,8 @@ GO
         
         /*To import the image into the SQl server*/
         
-  EXEC dbo.usp_ImportImage 'File.prefix', 'C:\MyPictures\Input','File.jpg'
+    EXEC dbo.usp_ImportImage 'File.prefix', 'C:\MyPictures\Input','File.jpg'
         
         /* To Export the file */
-        EXEC dbo.usp_ExportImage 'File.prefix','C:\MyPictures\Input', 'File.jpg'
+    EXEC dbo.usp_ExportImage 'File.prefix','C:\MyPictures\Input', 'File.jpg'
         
