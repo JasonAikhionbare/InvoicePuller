@@ -24,6 +24,7 @@ CREATE TABLE InvoiceImage
   ALTER SERVER ROLE [bulkadmin] ADD MEMBER [Enter here the Login Name will wxwcite the Import]
   Go
   /* Image import stored porocedure */
+  /*HI MY NAME IS JEEVAN*/
 /*
 CREATE PROCEDURE dbo.usp_ImportImage 
 (
