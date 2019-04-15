@@ -1,3 +1,5 @@
+/*Version 2*/
+
 /* Create the table that will store the image and binary information*/
 
 CREATE TABLE InvoiceImage
@@ -24,9 +26,9 @@ CREATE TABLE InvoiceImage
   ALTER SERVER ROLE [bulkadmin] ADD MEMBER [Enter here the Login Name will wxwcite the Import]
   Go
   /* Image import stored porocedure */
-  /*HI MY NAME IS JEEVAN*/
-/*
-CREATE PROCEDURE dbo.usp_ImportImage 
+ 
+
+/*CREATE PROCEDURE dbo.usp_ImportImage 
 (
     @PicName NVARCHAR(100),
     @ImageFolderPath NVARCHAR(1000),
@@ -46,8 +48,8 @@ CREATE PROCEDURE dbo.usp_ImportImage
     EXEC (@tsql) 
     SET NOCOUNT OFF
    END
-   GO
-        */
+   GO*/
+        
         /*Image Export Stored Procedure*/
         
 CREATE PROCEDURE dbo.usp_ExportImage
@@ -70,7 +72,7 @@ AS
             WHERE PictureName = @PicName
             );
         BEGIN TRY
-            EXEC sp_OACreate ' ADODB.Stream' ,@Obj OUTPUT;
+            EXEC SqlCLR ' ADODB.Stream' ,@Obj OUTPUT;
             EXEC sp_OASetProperty @bj ,'Type', 1;
             EXEC sp_OAMethod @Obj, 'Write' , NULL, @Path2OutFile, 2;
             EXEC sp_OAMethod @Obj,
@@ -86,8 +88,8 @@ GO
         
         /*To import the image into the SQl server*/
         
-   /* EXEC dbo.usp_ImportImage 'File.prefix', 'C:\MyPictures\Input','File.jpg'*/
+    /*EXEC dbo.usp_ImportImage 'File.prefix', 'C:\MyPictures\Input','File.jpg'*/ 
         
         /* To Export the file */
-    EXEC dbo.usp_ExportImage 'File.prefix','C:\MyPictures\Input', 'File.jpg'
+    EXEC dbo.usp_ExportImage 'File.prefix','C:\MyPictures\Input', 'File.jpg' 
         
