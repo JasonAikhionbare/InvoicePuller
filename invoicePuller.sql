@@ -42,7 +42,7 @@ CREATE TABLE InvoiceImage
         @ImageFolderPath,
         '\ ',
         @FileName
-    SET @tsql = 'insert into InvoiceImage(pictureName, picFileName, PictureData)' +
+    SET (@tsql) = 'insert into InvoiceImage(pictureName, picFileName, PictureData)' +
                 ' SELECT ' + '''' + @PicName + '''' + ',' + '''' + ',*' + 
                    'FROM Openrowset( Bulk ' + '''' + @Path2OutFile + '''' + ', Single_Blob) as img'
     EXEC (@tsql) 
@@ -92,4 +92,3 @@ GO
         
         /* To Export the file */
     EXEC dbo.usp_ExportImage 'File.prefix','C:\MyPictures\Input', 'File.jpg' 
-        
