@@ -82,7 +82,7 @@ AS
         
 END 
 GO
-        
+        /* Rearrange END tags in order to  facilitate try-catch block*/
         
         /*To import the image into the SQl server*/
         
