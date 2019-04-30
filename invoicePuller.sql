@@ -1,5 +1,5 @@
-
-/*
+--EXTRACTION OF BINARY INFORMATION
+--Testing commits
 
   CREATE TABLE [dbo].[Invoice]
   (
@@ -59,16 +59,18 @@
         
         
         --Reset the variables for next use
-        SELECT @data = NULL  
+  /*      SELECT @data = NULL  
         , @init = NULL
-        , @fPath = NULL  
+        , @fPath = NULL  Cannot add the server principal 'Enter here the Login Name that will execute the Import', because it does not exist or you do not have permission.
+
         , @folderPath = NULL
         SET @i -= 1
         END 
-
+*/
   
-  */
 
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
 
@@ -77,8 +79,8 @@
 /*THIS WILL CREATE THE OUT.TXT FILES WITH NAMES IN IT*/
 
 /* Create the table that will store the image information*/
-
-/*CREATE TABLE  Invoicer
+/*
+CREATE TABLE InvoiceImage
 (
   PictureName NVARCHAR(40) PRIMARY KEY NOT NULL,
   picFileName NVARCHAR(100),
@@ -88,8 +90,8 @@
   
  /* Setting and activitating OLE Automation procedures on the SQL Server for the image
  export action and envoking BulkAdmin privieldge*/
- 
-  /*Use master
+ /*
+  Use master
   GO
   EXEC sp_configure 'show advanced options', 1;
   GO
@@ -99,13 +101,12 @@
   GO
   RECONFIGURE;
   GO
-  ALTER SERVER ROLE [bulkadmin] ADD MEMBER [Enter here the Login Name that will execute the Import] 
-  GO  
-  */
+  ALTER SERVER ROLE [bulkadmin] ADD MEMBER [Enter here the Login Name will wxwcite the Import]
+  Go*/
   --Image import stored porocedure 
- 
+ /*
 
-/*CREATE PROCEDURE dbo.usp_ImportImage 
+CREATE PROCEDURE dbo.usp_ImportImage 
 (
     @PicName NVARCHAR(100),
     @ImageFolderPath NVARCHAR(1000),
@@ -118,57 +119,49 @@
     SET @Path2OutFile= CONCAT (
         @ImageFolderPath,
         '\ ',
-        @FileName);
-    SET @tsql = 'insert into InvoiceImage(pictureName, picFileName, PictureData)' +
+        @FileName
+    SET (@tsql) = 'insert into InvoiceImage(pictureName, picFileName, PictureData)' +
                 ' SELECT ' + '''' + @PicName + '''' + ',' + '''' + ',*' + 
                    'FROM Openrowset( Bulk ' + '''' + @Path2OutFile + '''' + ', Single_Blob) as img'
     EXEC (@tsql) 
     SET NOCOUNT OFF
    END
    GO
-       */
+       */ 
         --Image Export Stored Procedure
- /*    
-CREATE PROCEDURE dbo.usp_ExportImage (
-   @PicName NVARCHAR (100)
-   ,@ImageFolderPath NVARCHAR(1000)
-   ,@Filename NVARCHAR(1000)
-   )
-AS
-BEGIN
-   DECLARE @ImageData VARBINARY (max);
-   DECLARE @Path2OutFile NVARCHAR (2000);
-   DECLARE @Obj INT
- 
-   SET NOCOUNT ON
- 
- SELECT @ImageData = (
-         SELECT convert (VARBINARY (max), PictureData, 1)
-         FROM Pictures
-         WHERE pictureName = @PicName
-         );
- 
-   SET @Path2OutFile = CONCAT (
-         @ImageFolderPath
-         ,'\'
-         , @Filename
-         );
-    BEGIN TRY
-     EXEC sp_OACreate 'CLR Enabled' ,@Obj OUTPUT;
-     EXEC sp_OASetProperty @Obj ,'Type',1;
-     EXEC sp_OAMethod @Obj,'Open';
-     EXEC sp_OAMethod @Obj,'Write', NULL, @ImageData;
-     EXEC sp_OAMethod @Obj,'SaveToFile', NULL, @Path2OutFile, 2;
-     EXEC sp_OAMethod @Obj,'Close';
-     EXEC sp_OADestroy @Obj;
-    END TRY
-    
- BEGIN CATCH
-  EXEC sp_OADestroy @Obj;
- END CATCH
- 
-   SET NOCOUNT OFF
-END
+ /*       
+CREATE PROCEDURE dbo.usp_ExportImage
+(
+    @PicName NVARCHAR (100),
+    @ImageFolderPath NVARCHAR (1000),
+    @FileName NVARCHAR(1000)
+    )
+AS 
+     BEGIN
+        DECLARE @ImageData VARBINARY (max);
+        DECLARE @Path2OutFile NVARCHAR(2000);
+        DECLARE @Obj INT
+        
+        SET NOCOUNT ON
+        
+        SELECT @ImageData = (
+            SELECT convert (VARBINARY (max), PictureData, 1)
+            FROM InvoiceImage
+            WHERE PictureName = @PicName
+            );
+        BEGIN TRY
+            EXEC SqlCLR ' ADODB.Stream' ,@Obj OUTPUT;
+            EXEC sp_OASetProperty @bj ,'Type', 1;
+            EXEC sp_OAMethod @Obj, 'Write' , NULL, @Path2OutFile, 2;
+            EXEC sp_OAMethod @Obj,
+        END TRY 
+        BEGIN CATCH
+            EXEC sp_OADestroy @Obj;
+        END CATCH
+        
+        SET NOCOUNT OFF
+        
+END 
 GO*/
 /*BINARY FILE TABLE PREP*/
 /*CREATE TABLE BinaryInfo
@@ -194,11 +187,9 @@ CREATE TABLE InvoiceData
 */
         /*To import the image into the SQl server*/
         
-    EXEC dbo.usp_ImportImage '1', 'C:\Users\jason.aikhionbare\Documents\Jason_Aikhionbare_ProjectWork','InvoiceTest.pdf'*/
+    /*EXEC dbo.usp_ImportImage 'File.prefix', 'C:\MyPictures\Input','File.jpg'*/ 
         
         /* To Export the file */
-   /* EXEC dbo.usp_ExportImage 'CU','C:\Users\jason.aikhionbare\Documents\Jason_Aikhionbare_ProjectWork', 'InvoiceTest.pdf' */
+  /*  EXEC dbo.usp_ExportImage 'File.prefix','C:\MyPictures\Input', 'File.jpg' 
 
   /*------------------------------------------------------------------------------------------*/
-
-  /*SELECT * FROM Invoicer;*/
